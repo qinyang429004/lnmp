@@ -173,7 +173,7 @@ RUN apk add --no-cache freetype-dev libjpeg-turbo-dev libpng-dev && \
     printf "\n" | pecl install imagick && \
     docker-php-ext-enable imagick
 # INSTALL_COMPOSER
-ARG COMPOSER_REPO_PACKAGIST=https://mirrors.aliyun.com/composer/
+ARG COMPOSER_REPO_PACKAGIST=https://packagist.phpcomposer.com/
     # Install composer and add its bin to the PATH.
 RUN curl -s http://getcomposer.org/installer | php && \
     echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' >> ~/.bashrc && \
