@@ -32,7 +32,7 @@ services:
       - mysql
       - redis
     # image: thinksvip/lnmp:php-alpine
-    image: registry.cn-shenzhen.aliyuncs.com/thinks/lnmp:php-alpine
+    image: registry.cn-shenzhen.aliyuncs.com/qinyang/lnmp:php-7.4-python-3.8.5
     volumes:
       - "${VOLUMES_DRIVER}:/sock"
       - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
@@ -72,7 +72,7 @@ services:
   # MySQL
   mysql:
     # image: thinksvip/lnmp:mysql
-    image: registry.cn-shenzhen.aliyuncs.com/thinks/lnmp:mysql
+    image: registry.cn-shenzhen.aliyuncs.com/qinyang/lnmp:mysql
     volumes:
       - ${MYSQL_HOST_CONF_PATH}my${MYSQL_VERSION}.cnf:/etc/mysql/conf.d/mysql.cnf:ro,cached
       - ${DATA_PATH_HOST}/mysql:/var/lib/mysql/:rw,cached
