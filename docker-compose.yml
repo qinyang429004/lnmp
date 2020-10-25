@@ -7,7 +7,7 @@ services:
       - php
     # nginx镜像的路径
     # image: thinksvip/lnmp:nginx-alpine
-    image: registry.cn-shenzhen.aliyuncs.com/thinks/lnmp:nginx-alpine
+    image: registry.cn-shenzhen.aliyuncs.com/qinyang/lnmp:nginx-alpine
     # 这样使nginx容器把网站文件和目录存放到主机目录中，持久化和方便管理
     volumes:
       - "${VOLUMES_DRIVER}:/sock"
@@ -57,7 +57,7 @@ services:
     depends_on:
       - php
     # image: thinksvip/lnmp:php-queue
-    image: registry.cn-shenzhen.aliyuncs.com/thinks/lnmp:php-queue
+    image: registry.cn-shenzhen.aliyuncs.com/qinyang/lnmp:php-queue
     volumes:
       - "${VOLUMES_DRIVER}:/sock"
       - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}
@@ -93,7 +93,7 @@ services:
   # REDIS
   redis:
     # image: thinksvip/lnmp:redis
-    image: registry.cn-shenzhen.aliyuncs.com/thinks/lnmp:redis
+    image: registry.cn-shenzhen.aliyuncs.com/qinyang/lnmp:redis
     volumes:
       - ${DATA_PATH_HOST}/redis:/data/:rw,cached
       - ${REDIS_HOST_CONF_PATH}:/usr/local/redis/redis.conf:ro,cached
@@ -112,7 +112,7 @@ services:
     depends_on:
       - php
     # image: thinksvip/lnmp:node
-    image: registry.cn-shenzhen.aliyuncs.com/thinks/lnmp:node
+    image: registry.cn-shenzhen.aliyuncs.com/qinyang/lnmp:node
     volumes:
       - ${NODE_PATH_HOST}:/app/laravel-echo-server.json:ro
     ports:
