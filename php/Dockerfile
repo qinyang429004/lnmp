@@ -25,7 +25,7 @@ RUN apk --no-cache add tzdata && \
 
 # Install general dependencies
 RUN apk --update add \
-  curl \
+  curl-dev \
   libevent-dev \
   libmcrypt-dev \
   libxml2-dev \
@@ -191,12 +191,12 @@ RUN apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS && \
     apk del .phpize-deps
 # INSTALL_XDEBUG
 #  #Install the xdebug extension
-# RUN if [ $(php -r "echo PHP_MAJOR_VERSION;") = "5" ]; then \
-#       pecl install xdebug-2.5.5; \
-#     else \
-#       pecl install xdebug; \
-#     fi && \
-#     docker-php-ext-enable xdebug 
+RUN if [ $(php -r "echo PHP_MAJOR_VERSION;") = "5" ]; then \
+      pecl install xdebug-2.5.5; \
+    else \
+      pecl install xdebug; \
+    fi && \
+    docker-php-ext-enable xdebug
 # INSTALL_MEMCACHED
     # Install the php memcached extension
 RUN apk add --no-cache libmemcached-dev zlib-dev && \
@@ -209,7 +209,7 @@ RUN apk add --no-cache libmemcached-dev zlib-dev && \
 # # Install swoole extension
 # # swoole require PHP version 5.5 or later.
 #     # Install Php Swoole Extension
-# 
+#
 # RUN if [ $(php -r "echo PHP_MAJOR_VERSION;") = "5" ]; then \
 #       pecl install swoole-2.0.11; \
 #     else \
@@ -221,15 +221,17 @@ RUN apk add --no-cache libmemcached-dev zlib-dev && \
 #     fi && \
 #     docker-php-ext-enable swoole
 # COMPOSER_PHPCSFIXER
-# 
-# RUN composer global require friendsofphp/php-cs-fixer && \
-# # COMPOSER_CODESNIFFER
-#     composer global require "squizlabs/php_codesniffer=*" 
+RUN composer global require friendsofphp/php-cs-fixer && \
+# COMPOSER_CODESNIFFER
+    composer global require "squizlabs/php_codesniffer=*" && \
+    composer clear-cache
+# INSTALL_YAR
+RUN pecl install msgpack &&\
+    docker-php-ext-enable msgpack &&\
+    pecl install yar && \
+    docker-php-ext-enable yar
 # # Check PHP version:
 RUN php -v | head -n 1 | grep -q "PHP ${LARADOCK_PHP_VERSION}."
-
-
-
 # Clean up
 RUN apk del autoconf g++ make && rm -rf /tmp/* /var/cache/apk/*
 
