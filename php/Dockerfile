@@ -53,7 +53,7 @@ RUN if [ $(php -r "echo PHP_MAJOR_VERSION;") = "7.4" ]; then \
         options="--with-freetype --with-jpeg --with-webp"; \
     else \
         options="--with-gd --with-freetype-dir=/usr/include/ --with-png-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-webp-dir=/usr/include/"; \
-    fi 
+    fi
 RUN apk add --no-cache freetype-dev libjpeg-turbo-dev libpng-dev && \
     docker-php-ext-configure gd ${options} && \
     docker-php-ext-install gd && \
@@ -167,7 +167,7 @@ RUN apk add --no-cache freetype-dev libjpeg-turbo-dev libpng-dev && \
 # # INSTALL_LDAP
 # 	  apk add --no-cache ldb-dev && \
 # 	  apk add --no-cache openldap-dev && \
-#     docker-php-ext-install ldap && \ 
+#     docker-php-ext-install ldap && \
 # INSTALL_IMAGICK
     apk add --no-cache file-dev imagemagick-dev && \
     printf "\n" | pecl install imagick && \
@@ -180,7 +180,7 @@ RUN curl -s http://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer  && \
     . ~/.bashrc &&\
 # COMPOSER_REPO_PACKAGIST
-    composer config -g repo.packagist composer ${COMPOSER_REPO_PACKAGIST} 
+    composer config -g repo.packagist composer ${COMPOSER_REPO_PACKAGIST}
 # INSTALL_REDIS
     # Install Php Redis Extension
 RUN apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS && \
@@ -191,12 +191,12 @@ RUN apk add --no-cache --update --virtual .phpize-deps $PHPIZE_DEPS && \
     apk del .phpize-deps
 # INSTALL_XDEBUG
 #  #Install the xdebug extension
-RUN if [ $(php -r "echo PHP_MAJOR_VERSION;") = "5" ]; then \
-      pecl install xdebug-2.5.5; \
-    else \
-      pecl install xdebug; \
-    fi && \
-    docker-php-ext-enable xdebug
+# RUN if [ $(php -r "echo PHP_MAJOR_VERSION;") = "5" ]; then \
+#       pecl install xdebug-2.5.5; \
+#     else \
+#       pecl install xdebug; \
+#     fi && \
+#     docker-php-ext-enable xdebug
 # INSTALL_MEMCACHED
     # Install the php memcached extension
 RUN apk add --no-cache libmemcached-dev zlib-dev && \
@@ -221,10 +221,10 @@ RUN apk add --no-cache libmemcached-dev zlib-dev && \
 #     fi && \
 #     docker-php-ext-enable swoole
 # COMPOSER_PHPCSFIXER
-RUN composer global require friendsofphp/php-cs-fixer && \
-# COMPOSER_CODESNIFFER
-    composer global require "squizlabs/php_codesniffer=*" && \
-    composer clear-cache
+#
+# RUN composer global require friendsofphp/php-cs-fixer && \
+# # COMPOSER_CODESNIFFER
+#     composer global require "squizlabs/php_codesniffer=*"
 # INSTALL_YAR
 RUN pecl install msgpack &&\
     docker-php-ext-enable msgpack &&\
@@ -232,6 +232,9 @@ RUN pecl install msgpack &&\
     docker-php-ext-enable yar
 # # Check PHP version:
 RUN php -v | head -n 1 | grep -q "PHP ${LARADOCK_PHP_VERSION}."
+
+
+
 # Clean up
 RUN apk del autoconf g++ make && rm -rf /tmp/* /var/cache/apk/*
 
