@@ -40,7 +40,7 @@ services:
       - ${PHP_FRM_HOST_CONF_PATH}php-fpm.d/www.conf:/usr/local/etc/php-fpm.d/www.conf:ro,cached
       - ${PHP_FRM_HOST_CONF_PATH}php-fpm.d/zz-docker.conf:/usr/local/etc/php-fpm.d/zz-docker.conf:ro,cached
       - ${PHP_FRM_HOST_LOG_PATH}:/var/log/php-fpm/:rw,cached
-      - ${PHP_FRM_HOST_CONF_PATH}crontab:/var/spool/cron/crontabs:rw
+      - ${PHP_FRM_HOST_CONF_PATH}www-data:/var/spool/cron/www-data:rw
     ports:
       - "${PHP_FRM_PORT}:9000"
     extra_hosts:
