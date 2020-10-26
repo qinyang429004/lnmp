@@ -236,7 +236,6 @@ RUN usermod -u 1000 www-data
 
 
 # INSTER_PYTHON
-FROM python:3.7.3-alpine
 
 RUN pecho "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk add --update --no-cache py3-scipy
