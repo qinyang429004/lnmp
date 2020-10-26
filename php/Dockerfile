@@ -238,6 +238,5 @@ RUN usermod -u 1000 www-data
 # INSTER_PYTHON
 FROM python:3.7.3-alpine
 
-RUN pip install json &&\
-    pip install scipy &&\
+RUN pip install scipy &&\
     pip install pymysql
