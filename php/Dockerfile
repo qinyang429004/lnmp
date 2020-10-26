@@ -239,5 +239,7 @@ RUN usermod -u 1000 www-data
 
 RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 RUN apk add --update --no-cache py3-scipy
-RUN apk add --update --no-cache py3-pymysql
+RUN apk add --update --no-cache  py-pip
+RUN python3 -m pip install PyMySQL
+
 
