@@ -36,12 +36,6 @@ RUN apk --update add \
   shadow \ 
   oniguruma-dev \
   libwebp-dev 
-
-# Install Python
-RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
-RUN python3 -m ensurepip
-#RUN pip3 install --no-cache --upgrade pip setuptools
-
 # INSTALL_MCRYPT
 RUN if [ $(php -r "echo PHP_MAJOR_VERSION;") = "7.4" ]; then \
     pecl install mcrypt-1.0.3 && docker-php-ext-enable mcrypt; \
@@ -239,3 +233,12 @@ RUN php -v | head -n 1 | grep -q "PHP ${LARADOCK_PHP_VERSION}."
 RUN apk del autoconf g++ make && rm -rf /tmp/* /var/cache/apk/*
 
 RUN usermod -u 1000 www-data
+
+
+# INSTER_PYTHON
+FROM python:3.7.3-alpine
+
+RUN pip install sys &&\
+    pip install json &&\
+    pip install scipy &&\
+    pip install pymysql 
