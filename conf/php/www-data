@@ -13,5 +13,5 @@
 * * * * * php /var/www/html/new_bestope/yii workerman-websocket-message/insert-message
 
 #判断workerman是否在执行中，如果未执行就启动，如果执行不做任何操作
-* * * * * bash /var/www/html/new_bestope/crontab.sh
-* * * * * bash /var/www/html/new_bestope/workerman/crontab_task.sh
+* * * * * sh /var/www/html/new_bestope/crontab.sh
+* * * * * sh /var/www/html/new_bestope/workerman/crontab_task.sh

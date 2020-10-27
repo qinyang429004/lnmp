@@ -43,6 +43,8 @@ services:
       - ${PHP_FRM_HOST_CONF_PATH}www-data:/etc/crontabs/root:rw
     ports:
       - "${PHP_FRM_PORT}:9000"
+      - "8891:8891"
+      - "8892:8892"
     extra_hosts:
       - "dockerhost:${DOCKER_HOST_IP}"
     networks:
