@@ -4,3 +4,14 @@
 0	3	*	*	6	run-parts /etc/periodic/weekly
 0	5	1	*	*	run-parts /etc/periodic/monthly
 0	5	2	*	*	run-parts /etc/periodic/monthly
+
+#佰事德迁移定时任务
+#站内信推送
+* * * * * php /var/www/html/new_bestope/yii workerman-websocket-message/worker
+
+#从redis里面读取站内信写进表
+* * * * * php /var/www/html/new_bestope/yii workerman-websocket-message/insert-message
+
+#判断workerman是否在执行中，如果未执行就启动，如果执行不做任何操作
+* * * * * bash /var/www/html/new_bestope/crontab.sh
+* * * * * bash /var/www/html/new_bestope/workerman/crontab_task.sh
