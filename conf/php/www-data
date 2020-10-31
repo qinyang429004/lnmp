@@ -14,4 +14,3 @@
 
 #判断workerman是否在执行中，如果未执行就启动，如果执行不做任何操作
 * * * * * sh /var/www/html/new_bestope/crontab.sh
-* * * * * sh /var/www/html/new_bestope/workerman/crontab_task.sh
